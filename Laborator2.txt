@@ -1,3 +1,18 @@
+#Exercitii propuse spre rezolvare:
+
+#Ex I.3
+table = read.csv("life_expect.csv", header = T)
+male = table[['male']]
+female = table[['female']]
+intervals = c(30, 40, 50, 60, 70, 80, 90, 100)
+hist(male, breaks=intervals, right=T, freq=T)
+hist(female, breaks=intervals, right=T, freq=T)
+
+
+
+#Ex III.3
+
+
 outliers_mean=function(sample) {
   m = mean(sample)
   s = sd(sample)
