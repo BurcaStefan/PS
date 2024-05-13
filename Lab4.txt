@@ -1,0 +1,64 @@
+#Exercitii de rezolvat
+#I.2
+parabola_area = function(N) {
+  N_C = 0
+  for(i in 1:N) {
+    x = runif(1, 0, 2)
+    y = runif(1, 0, 2)
+    if(y <= (-2*x^2 + 5*x - 2)) {
+      N_C = N_C + 1
+    }
+  }
+  area_approx = (N_C / N) * 4
+  return(area_approx)
+}
+
+abs_err = abs(parabola_area(10000)-(((2/3)*2^3 + (5/2)*2^2 - 2*2)-((-2/3) * (1/2)^3 + (5/2)*(1/2)^2-2*(1/2))))
+rel_err = abs_err/(((2/3)*2^3 + (5/2)*2^2 - 2*2)-((-2/3) * (1/2)^3 + (5/2)*(1/2)^2-2*(1/2)))
+abs_err
+rel_err
+
+
+
+#II.1.b
+MC_integration = function(N) {
+  sum = 0
+  for(i in 1:N) {
+    u = runif(1, 1, 4)
+    sum = sum + exp(u)
+  }
+  return(3*sum/N)
+}
+
+MC_integr_average= function(k, N) {
+  estimates = vector()
+  for(i in 1:k)
+    estimates[i] = MC_integration(N)
+  print(mean(estimates))
+  print(sd(estimates))
+}
+
+MC_integr_average(30, 10000)
+
+
+
+
+#II.2
+MC_improved_integration = function(N) {
+  sum = 0
+  for(i in 1:N) {
+    u = rexp(1, 1)
+    sum = sum + exp(-2*u)/exp(-u)
+  }
+  return(sum/N)
+}
+
+MC_imprvd_integr_average = function(k, N) {
+  estimates = vector()
+  for(i in 1:k)
+    estimates[i] = MC_improved_integration(N)
+  print(mean(estimates))
+  print(sd(estimates))
+}
+
+MC_imprvd_integr_average(3, 50000)
