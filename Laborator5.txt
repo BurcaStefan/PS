@@ -1,0 +1,24 @@
+#Exercitiu propuse spre rezolvare
+simulare_variabila_aleatoare=function(v,p)
+{
+  if (length(v) != length(p)) {
+    stop("Definire gresita a lui X")
+  }
+  
+  if (sum(p) != 1) {
+    stop("Suma probabilitatilor a dat diferit de 1")
+  }
+
+  U=runif(1,0,1)
+  print(U)
+  intervale_p = cumsum(p)
+  index= which(U < intervale_p)[1]
+  rezultat = v[index]
+  
+  return(rezultat)
+}
+
+x=c(1,2,3,4)
+y=c(0.1,0.2,0.3,0.4)
+
+simulare_variabila_aleatoare(x,y)
