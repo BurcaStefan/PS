@@ -1,0 +1,74 @@
+#Exercitii propuse spre rezolvare
+#II.6
+zconfidence_interal_modificat = function(alfa, nume_fisier, sigma)
+{
+  sample_data = scan(nume_fisier);
+  sample_mean = mean(sample_data)
+  n=length(sample_data)
+ 
+  critical_z = qnorm(1 - alfa/2, 0, 1) 
+  a = sample_mean - critical_z*sigma/sqrt(n)
+  b = sample_mean + critical_z*sigma/sqrt(n)
+  interval = c(a, b)
+  interval
+}
+
+zconfidence_interal_modificat(0.05, 'history.txt', 5)
+
+
+
+
+#III.4
+
+t_conf_interval_modificat = function(alfa, nume_fisier) {
+
+  sample_data = scan(nume_fisier)
+  sample_mean = mean(sample_data)
+  s = sd(sample_data)
+  n = length(sample_data)
+  
+  se = s / sqrt(n)
+  critical_t = qt(1 - alfa/2, n - 1)
+  a = sample_mean - critical_t * se
+  b = sample_mean + critical_t * se
+  
+  interval = c(a, b)
+  return(interval)
+}
+
+t_conf_interval_modificat(0.05, "history.txt")
+t_conf_interval_modificat(0.01 ,"history.txt")
+
+
+
+
+
+#IV.2
+
+test_proportion_modificat = function(alfa, p0, n, succese, tip)
+{
+  p_prim = succese / n
+  z_score = (p_prim - p0) / sqrt(p0 * (1 - p0) / n)
+
+  if (tip == 'r')
+    critical_z = qnorm(1 - alfa)
+  if (tip == 'l')
+    critical_z = qnorm(alfa)
+  if (tip == 's')
+    critical_z = qnorm(1 - alfa / 2)
+  
+  return(c(z_score, critical_z))
+}
+
+result = test_proportion_modificat(0.05,0.10,150,20,'r')
+z_score = result[1]
+critical_z = result[2]
+
+z_score
+critical_z
+
+if (z_score > critical_z) {
+  print("Ipoteza se respinge!")
+} else {
+  print("Ipoteza nu se respinge!")
+}
